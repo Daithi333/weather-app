@@ -16,13 +16,19 @@ export const LocationSearch: FC<LocationSearchProps> = ({onSearch}) => {
 
     return (
         <div>
-        <label>
+          <label>
             Add Location
-            <input className="ml-1 mr-1" type="text" value={locationSearch}
-                onChange={e => setLocationSearch(e.target.value)}/>
-        </label>
-        <button className="btn btn-primary"
-                onClick={addLocation} disabled={disableSearch}>Search</button>
+            <input 
+              className="ml-1 mr-1"
+              type="text"
+              value={locationSearch}
+              onChange={e => setLocationSearch(e.target.value)}
+              />
+          </label>
+          <button 
+            className="btn btn-primary"
+            onClick={addLocation} disabled={disableSearch}>Search
+          </button>
         </div>
     );
 }

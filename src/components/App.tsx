@@ -5,8 +5,10 @@ import { LocationSearch } from './LocationSearch';
 import { LocationTable } from './LocationTable';
 import './App.css';
 import { ErrorAlert, WarningAlert } from './Alert';
+import { WeatherSummary } from './WeatherSummary';
 
 const App: FC = () => {
+  const [currentLocation, setCurrentLocation] = useState<WeatherLocation | null>(null);
   const [locations, setLocations] = useState<WeatherLocation[]>([]);
   const [error, setError] = useState('');
   const [warning, setWarning] = useState(''); 
@@ -36,7 +38,12 @@ const App: FC = () => {
       <LocationSearch onSearch={addLocation}/>
       <ErrorAlert message={error}/>
       <WarningAlert message={warning}/>
-      <LocationTable locations={locations}/>
+      <LocationTable 
+        locations={locations} 
+        current={currentLocation} 
+        onSelect={location => setCurrentLocation(location)}
+      />
+      <WeatherSummary location={currentLocation}/>
     </div>
   );
 }

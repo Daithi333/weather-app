@@ -1,4 +1,4 @@
-import { WeatherLocation } from "../model/Weather";
+import { WeatherLocation, Weather } from "../model/Weather";
 
 const key: string = process.env.REACT_APP_OPEN_WEATHER_API_KEY as string;
 if (key === undefined) {
@@ -16,4 +16,16 @@ export async function searchLocation(term: string): Promise<WeatherLocation | un
     if (result.status !== 200) throw new Error('Failed to read location data');
   
     return await result.json();
+}
+
+export async function readWeather(locationId: number): Promise<Weather> {
+  const current = await fetch(`${server}/weather?id=${locationId}&${keyQuery}&units=metric`);
+
+  if (current.status !== 200) throw new Error('Failed to read location data');
+
+  return await current.json();
+}
+
+export function getIconUrl(code: string): string {
+  return `http://openweathermap.org/img/wn/${code}.png`;
 }
